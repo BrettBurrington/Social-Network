@@ -1,16 +1,27 @@
-const Reaction = require('../models/Reaction');
+const Reaction = require('../models/Reaction'); // Adjust the import path based on your project structure
 
 const reactionController = {
-  getAllReactions: async (req, res) => {
+  createReaction: async (req, res) => {
     try {
-      const reactions = await Reaction.find();
-      res.json(reactions);
-    } catch (err) {
-      res.status(500).json({ error: 'Failed to retrieve reactions.' });
+      const newReaction = await Reaction.create(req.body);
+      res.status(201).json(newReaction);
+    } catch (error) {
+      res.status(400).json({ error: 'Failed to create reaction' });
     }
   },
 
-  // Other controller methods for CRUD operations
+  deleteReaction: async (req, res) => {
+    try {
+      const deletedReaction = await Reaction.findByIdAndDelete(req.params.reactionId);
+      if (deletedReaction) {
+        res.json(deletedReaction);
+      } else {
+        res.status(404).json({ error: 'Reaction not found' });
+      }
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to delete reaction' });
+    }
+  }
 };
 
 module.exports = reactionController;
