@@ -15,7 +15,6 @@ const thoughtSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  // ... other fields
   reactions: [
     {
       type: mongoose.Schema.Types.ObjectId,

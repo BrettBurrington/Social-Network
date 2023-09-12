@@ -1,4 +1,4 @@
-const User = require('../models/User'); // Make sure to adjust the import path based on your project structure
+const User = require('../models/User');
 
 const userController = {
   getAllUsers: async (req, res) => {
